@@ -40,4 +40,4 @@ jobs:
         uses: ./.github/actions/docker_push
         with:
           docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
-          image_reference: academy
+          image_reference: academy:v1.0.0
