@@ -28,4 +28,4 @@ jobs:
         with: 
           image_name: academy
           path_dockerfile: resources/base_code/Dockerfile
-
+          tag_name: v1.0.0
