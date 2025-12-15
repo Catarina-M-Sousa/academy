@@ -26,3 +26,6 @@ jobs:
         run: | 
           docker build . --file resources/base_code/Dockerfile --tag academy:$(date +%s)
           docker image ls
+
+      - name: New Action
+        uses: ./.github/actions/maven_build
