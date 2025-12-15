@@ -23,9 +23,21 @@ jobs:
       - name: Build with Maven Action
         uses: ./.github/actions/maven_build
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build Docker Image Action
         uses: ./.github/actions/docker_build
         with: 
           image_name: academy
           path_dockerfile: resources/base_code/Dockerfile
           tag_name: v1.0.0
+
+      - name: Push Docker image to Docker Hub
+        uses: ./.github/actions/docker_push
+        with:
+          docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          image_reference: academy:latest

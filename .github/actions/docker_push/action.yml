@@ -1,0 +1,19 @@
+name: Docker-Push-Action
+description: Docker-Pushes-Action
+inputs:
+  docker_username:
+    description: "Docker username"
+    required: true
+
+  image_reference:
+    description: "Name of the Docker image to build"
+    required: true
+runs:
+  using: composite
+  steps:
+    - run: |
+        docker tag "${{ inputs.image_reference }}" "${{ inputs.docker_username }}/${{ inputs.image_reference }}"
+        
+        docker push "${{ inputs.docker_username }}/${{ inputs.image_reference }}"
+
+      shell: bash
