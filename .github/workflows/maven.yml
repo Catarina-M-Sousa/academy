@@ -23,8 +23,6 @@ jobs:
       - name: Build with Maven Action
         uses: ./.github/actions/maven_build
 
-      - name: Build docker image
-        run: | 
-          docker build . --file resources/base_code/Dockerfile --tag academy:$(date +%s)
-          docker image ls
+      - name: Build Docker Image Action
+        uses: ./.github/actions/docker_build
 
