@@ -1,14 +1,36 @@
 name: Docker-Build-Action
 description: Docker-Builds-Action
 inputs:
-  replace_with_your_input_name:
-    description: "Replace-With-Your-Input-Description"
+  path_dockerfile:
+    description: "Path to the Dockerfile to use for the build"
     required: false
-    default: "Replace-With-Your-Input-Default-Value"
+    default: "Dockerfile"
+
+  image_name:
+    description: "Name of the Docker image to build"
+    required: true
+
+  tag_name:
+    description: "Tag to apply to the Docker image"
+    required: false
 runs:
   using: composite
   steps:
     - run: |
-        docker build . --file resources/base_code/Dockerfile --tag academy:$(date +%s)
+        if [ -z "${{ inputs.replace_with_input_name }}" ]; then
+          export TAG=$(date +%s)
+        else
+          export TAG="${{ inputs.replace_with_input_name }}"
+        fi
+
+        echo "Building Docker image '${{ inputs.image_name }}' with tag '$TAG'"
+
+        #docker build . --file resources/base_code/Dockerfile --tag academy:$(date +%s)
+        docker build . \
+          --file "${{ inputs.path_dockerfile }}" \
+          --tag "${{ inputs.image_name }}:$TAG"        
+
         docker image ls
+
+
       shell: bash

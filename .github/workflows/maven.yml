@@ -25,4 +25,7 @@ jobs:
 
       - name: Build Docker Image Action
         uses: ./.github/actions/docker_build
+        with: 
+          image_name: academy
+          path_dockerfile: resources/base_code/Dockerfile
 
