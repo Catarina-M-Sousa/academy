@@ -22,4 +22,5 @@ jobs:
 
       - name: Build with Maven
         working-directory: base_code
-        run: mvn -B package --file pom.xml
+        run: mvn -B package
+
